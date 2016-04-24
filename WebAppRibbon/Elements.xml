@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <CustomAction
+    Id="Nauplius.BlobCache"
+    Location="CommandUI.Ribbon">
+    <CommandUIExtension>
+      <CommandUIDefinitions>
+        <CommandUIDefinition Location="Ribbon.WebApp.Manage.Controls._children">
+          <Button
+            Id="Ribbon.WebApp.Manage.NewButton"
+            Alt="BLOB cache"
+            Sequence="100"
+            Command="ManageBlobCache"
+            Image32by32="/_admin/Nauplius.SharePoint.BlobCache/icon_32x32.png"
+            LabelText="BLOB cache"
+            TemplateAlias="o1"/>
+        </CommandUIDefinition>
+      </CommandUIDefinitions>
+    <CommandUIHandlers>
+      <CommandUIHandler
+        Command="ManageBlobCache"
+        EnabledScript="javascript:(function()
+          {
+            var $wa = SP.UI.Admin.WebApplicationPageComponent.get_selectedItem(0);
+            if ($wa != null)
+              {
+                if ($wa.getAttribute('IsCentralAdmin') == 'false')
+                  {
+                    return true;
+                  }
+              }
+          })()"
+        CommandAction="javascript:
+          function resultCallback(result, value)
+            {
+              if (result == 1)
+              {
+                SP.UI.Notify.addNotification('BLOB cache settings have been successfully applied');
+              }
+              else if (result == 2)
+              {
+                SP.UI.Notify.addNotification('Something went wrong saving BLOB cache settings');
+              }
+              else if (result == 3)
+              {
+              }
+            }
+            
+            var $wa = SP.UI.Admin.WebApplicationPageComponent.get_selectedItem();
+            var options = {
+              url: '/_admin/Nauplius.SharePoint.BlobCache/BlobCacheSettings.aspx?Id=' + $wa.getAttribute('Id'),
+              allowMaximize: true,
+              showClose: true,
+              width: 800,
+              height: 500,
+              dialogReturnValueCallback: resultCallback};
+            SP.UI.ModalDialog.showModalDialog(options);" />
+    </CommandUIHandlers>
+    </CommandUIExtension>
+  </CustomAction>
+</Elements>

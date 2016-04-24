@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="42fd078d-f130-42f0-8727-4490ad320479" solutionId="42fd078d-f130-42f0-8727-4490ad320479" resetWebServer="false" title="Nauplius.SharePoint.BlobCache" description="BLOB Cache Manager for SharePoint 2013" sharePointProductVersion="15.0" name="Nauplius.SharePoint.BlobCache" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <features>
+    <featureReference itemId="3783cc34-037d-48b2-9688-901397d818dc" />
+  </features>
+  <projectItems>
+    <projectItemReference itemId="cf5906e9-e23f-4768-b1a1-17d921dcd84a" />
+    <projectItemReference itemId="fa941751-8790-462f-8d77-9425d004d696" />
+  </projectItems>
+</package>

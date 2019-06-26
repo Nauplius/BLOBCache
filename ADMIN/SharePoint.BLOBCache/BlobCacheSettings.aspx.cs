@@ -154,7 +154,7 @@ namespace Nauplius.SharePoint.BlobCache.Layouts.Nauplius.SharePoint.BlobCache
 
             if (TbCacheMaxAge.Text != string.Empty)
             {
-                dictionary.Add("max-age", MaxCacheAge(RemoveLeadingZeroAndAlpha(TbCacheMaxAge.Text)));
+                dictionary.Add("max-age", MaxCacheAge(RemoveAlpha(TbCacheMaxAge.Text)));
             }
 
             if (!Page.IsValid) return;
@@ -329,6 +329,11 @@ namespace Nauplius.SharePoint.BlobCache.Layouts.Nauplius.SharePoint.BlobCache
             return s = Regex.Replace(s, "[^.0-9]", "").TrimStart('0');
         }
 
+        internal string RemoveAlpha(string s)
+        {
+            return s = Regex.Replace(s, "[^.0-9]", "");
+        }
+
         internal string RemoveSlash(string location)
         {
             return location = location.TrimEnd(new char[] {'\\'});
@@ -336,6 +341,8 @@ namespace Nauplius.SharePoint.BlobCache.Layouts.Nauplius.SharePoint.BlobCache
 
         internal string MaxCacheAge(string maxAge)
         {
+            maxAge = int.Parse(maxAge).ToString(); //remove extra zeros to fix issue #3
+
             if (Convert.ToInt64(maxAge) > 31536000)
             {
                 maxAge = "31536000";
